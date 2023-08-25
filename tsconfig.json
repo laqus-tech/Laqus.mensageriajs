@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "declaration": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "strict": true,
+      "esModuleInterop": true,
+      "baseUrl": "./",
+      "paths": {
+        "laqus.mensageriajs": ["./node_modules/laqus.mensageriajs/dist"]
+      }
+    },
+    "include": ["./src"]
+  }
+  

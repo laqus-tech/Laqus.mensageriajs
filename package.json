@@ -1,0 +1,27 @@
+{
+  "name": "@laqus/laqus.mensageriajs",
+  "version": "1.0.8",
+  "description": "Esse Projeto de Biblioteca, serve para gerenciamento de mensageria com suporte a diferentes provedores, como RabbitMQ, SQS e futuramente outros; o intuito principal é abstrair de forma simples como gerenciamos esses `Providers`, como para configurar Filas, Exchanges/Tópicos, Pub/Sub no geral.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts",
+    "prepublish": "npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/amqplib": "^0.10.1",
+    "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "eslint": "^8.46.0",
+    "eslint-config-prettier": "^9.0.0",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "aws-sdk": "^2.1426.0"
+  }
+}
