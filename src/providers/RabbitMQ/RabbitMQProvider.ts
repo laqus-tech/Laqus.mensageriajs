@@ -61,6 +61,7 @@ export class RabbitMQProvider implements IMessageProvider {
 
     public async AddConsumer(queue: string, cb: (message: ConsumeMessage | null) => Promise<void>, options: Options.Consume): Promise<void> {
         if (!this._channel) this._channel = await this.LaqusChannel();
+        await this.LaqusAssertQueue(queue);
 
         this._channel.consume(queue, async (msg) => {
             await cb(msg);

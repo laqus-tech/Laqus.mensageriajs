@@ -1,6 +1,6 @@
 {
   "name": "@laqus/laqus.mensageriajs",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Esse Projeto de Biblioteca, serve para gerenciamento de mensageria com suporte a diferentes provedores, como RabbitMQ, SQS e futuramente outros; o intuito principal é abstrair de forma simples como gerenciamos esses `Providers`, como para configurar Filas, Exchanges/Tópicos, Pub/Sub no geral.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
