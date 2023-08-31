@@ -69,7 +69,7 @@ export class SQSProvider implements IMessageProvider {
                         message: tryParse(message)
                     })
                 }).promise();
-    
+
                 return;
             }
 
@@ -143,9 +143,7 @@ export class SQSProvider implements IMessageProvider {
         let queueMapper = this._queues.get(queue);
 
         if (!queueMapper || queueMapper === undefined) {
-            const result = await this._sqs.getQueueUrl({
-                QueueName: queue
-            }).promise()
+            const result = await this._sqs.createQueue({ QueueName: queue }).promise();
 
             if (!('QueueUrl' in result) || !result.QueueUrl)
                 throw new Error('QueueUrl not found');
@@ -165,17 +163,19 @@ export class SQSProvider implements IMessageProvider {
 
         if (!queueMapper) throw new Error('Queue not found!')
 
-        const { Messages } = await this._sqs.receiveMessage({
-            QueueUrl: queueMapper.queueURL,
-            MaxNumberOfMessages: 1
-        }).promise();
-
-        if (Messages && Messages.length > 0) {
-            await cb(Messages[0]);
-            await this._sqs.deleteMessage({
+        while (true) {
+            const { Messages } = await this._sqs.receiveMessage({
                 QueueUrl: queueMapper.queueURL,
-                ReceiptHandle: Messages[0].ReceiptHandle!,
+                MaxNumberOfMessages: 1
             }).promise();
+
+            if (Messages && Messages.length > 0) {
+                await cb(Messages[0]);
+                await this._sqs.deleteMessage({
+                    QueueUrl: queueMapper.queueURL,
+                    ReceiptHandle: Messages[0].ReceiptHandle!,
+                }).promise();
+            }
         }
     }
 
